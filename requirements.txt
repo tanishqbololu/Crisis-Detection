@@ -1,0 +1,4 @@
+spacy>=3.0.0
+en_core_web_md
+nltk
+streamlit

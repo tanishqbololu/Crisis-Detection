@@ -1,0 +1,59 @@
+START
+    Import Spacy, NLTK, and datetime libraries
+    Load Spacy model for text analysis
+    Define a set of stopwords from NLTK
+
+    FUNCTION nltk_tokenize_and_filter(text)
+        Tokenize the text and filter out stopwords
+        RETURN filtered_tokens
+
+    FUNCTION spacy_analyze(text)
+        Use Spacy to process text and extract tokens and entities
+        RETURN tokens, named_entities
+
+    FUNCTION detect_keywords(tokens)
+        Compare tokens with predefined urgent keywords
+        RETURN detected_keywords
+
+    FUNCTION sentiment_analyze(tokens)
+        Count positive and negative sentiment words
+        RETURN sentiment (1 for positive, -1 for negative, 0 for neutral)
+
+    FUNCTION time_of_day(current_hour)
+        RETURN time period based on the current hour
+
+    FUNCTION urgency_score(detected_keywords, sentiment, time_of_day)
+        Calculate and return urgency score based on keyword weight, sentiment weight, and time of day weight
+
+    FUNCTION should_alert_staff(urgency_score, threshold=50)
+        RETURN True if urgency score >= threshold, otherwise False
+
+    FUNCTION schedule_appointment(urgency_score)
+        Determine appointment date based on urgency score
+        RETURN target_date
+
+    user_input = GET input("Enter the patient's message:")
+    tokens = nltk_tokenize_and_filter(user_input)
+    detected_keywords = detect_keywords(tokens)
+    sentiment = sentiment_analyze(tokens)
+    current_hour = GET current hour
+    time_period = time_of_day(current_hour)
+    urgency_score = urgency_score(detected_keywords, sentiment, time_period)
+    alert = should_alert_staff(urgency_score)
+
+    current_date = GET current date
+
+    PRINT "Filtered Tokens:", tokens
+    PRINT "Detected Keywords:", detected_keywords
+    PRINT "Sentiment:", sentiment
+    PRINT "Time of Day:", time_period
+    PRINT "Current Date:", current_date
+    PRINT "Urgency Score:", urgency_score
+    PRINT "Should Alert Staff:", alert
+
+    target_date = schedule_appointment(urgency_score)
+    IF target_date IS valid THEN
+        PRINT "Appointment Target Date:", target_date
+    ELSE
+        PRINT "Urgency score too low."
+END
